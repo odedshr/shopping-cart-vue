@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "98b1aa8d1afea3b2fb89",
-    "url": "/shopping-cart-vue/css/app.e4ecb210.css"
+    "revision": "125499377192213367b5",
+    "url": "/shopping-cart-vue/css/app.748e9d4e.css"
   },
   {
-    "revision": "72b72a8d53a7f1455499",
-    "url": "/shopping-cart-vue/css/table.a39fd6df.css"
+    "revision": "309d73153ee890bf8a79",
+    "url": "/shopping-cart-vue/css/table.8892ad4a.css"
   },
   {
     "revision": "c1239c73c16d6f624ed4a28f33798e21",
@@ -14,10 +14,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "cc6558280e8fb07ee12249bf011a3700",
     "url": "/shopping-cart-vue/fonts/KhmerMN-Bold-02.ttf"
-  },
-  {
-    "revision": "7f2e0f9ec2fe0b018fe614e3b6c161a5",
-    "url": "/shopping-cart-vue/img/add-to-basket.7f2e0f9e.svg"
   },
   {
     "revision": "db5e3ee8b92f4b885d5eafd14c6ed0d6",
@@ -92,20 +88,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shopping-cart-vue/img/products/product-9.jpg"
   },
   {
-    "revision": "d73d071446410a495add8169a6f2ff72",
+    "revision": "91e917dbe5d47b2dbcdbe73cc3dc7d60",
     "url": "/shopping-cart-vue/index.html"
   },
   {
-    "revision": "98b1aa8d1afea3b2fb89",
-    "url": "/shopping-cart-vue/js/app.f8d9692d.js"
+    "revision": "125499377192213367b5",
+    "url": "/shopping-cart-vue/js/app.267fb064.js"
   },
   {
-    "revision": "4de3a77f33ae46231aac",
-    "url": "/shopping-cart-vue/js/chunk-vendors.a2c290fb.js"
+    "revision": "a2e6123c18e396452330",
+    "url": "/shopping-cart-vue/js/chunk-vendors.5b174038.js"
   },
   {
-    "revision": "72b72a8d53a7f1455499",
-    "url": "/shopping-cart-vue/js/table.77d4a317.js"
+    "revision": "309d73153ee890bf8a79",
+    "url": "/shopping-cart-vue/js/table.42a30813.js"
   },
   {
     "revision": "ae6e7ca63041af5e04aa6e26d4a44d67",
