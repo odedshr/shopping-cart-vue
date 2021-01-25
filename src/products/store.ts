@@ -7,13 +7,11 @@ export default {
   state: { items: [] as Product[] },
   mutations: {
     QUERY(state: { items: Product[] }, products: Product[]) {
-      console.log(`loaded ${products.length}`);
       state.items = products;
     },
   },
   actions: {
     query(store: { commit: Function }, query: SearchQuery) {
-      console.log('getProducts');
       getProducts(query).then(products => store.commit('QUERY', products));
     },
   },

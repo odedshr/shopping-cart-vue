@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4937dc127ae1562b43fe",
+    "revision": "4c6f772289ed4e7d9b76",
     "url": "/shopping-cart-vue/css/app.775ffa26.css"
   },
   {
@@ -92,12 +92,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shopping-cart-vue/img/products/product-9.jpg"
   },
   {
-    "revision": "8f3cf32eb0ce54d28b99e6777a9ce0fe",
+    "revision": "5615544065b51d69d5d7528517a3f38b",
     "url": "/shopping-cart-vue/index.html"
   },
   {
-    "revision": "4937dc127ae1562b43fe",
-    "url": "/shopping-cart-vue/js/app.66d8b93a.js"
+    "revision": "4c6f772289ed4e7d9b76",
+    "url": "/shopping-cart-vue/js/app.0938fb6d.js"
   },
   {
     "revision": "4de3a77f33ae46231aac",
