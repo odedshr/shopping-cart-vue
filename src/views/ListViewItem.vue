@@ -91,6 +91,11 @@ export default defineComponent({
   flex-direction: column;
   position: relative;
   overflow: hidden;
+
+  &:hover .product_image img {
+    filter: saturate(0.75);
+    transform: scale(1.1);
+  }
 }
 
 .product_outOfStock {
@@ -244,6 +249,8 @@ export default defineComponent({
   width: 23rem;
 
   img {
+    filter: saturate(1);
+    transition: transform 0.25s ease-in-out, filter 0.25s ease-in-out;
     width: 100%;
   }
 }
