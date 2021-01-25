@@ -6,7 +6,7 @@
     <td class="cartItem_name">{{ item.product.name }}</td>
     <td class="cartItem_cost">{{ item.product.price }}</td>
     <td class="cartItem_qty">
-      <button class="cartItem_qty_dec" @click="decrease(item.product)">
+      <button class="cartItem_qty_dec" @click.stop="decrease(item.product)">
         -
       </button>
       <input class="cartItem_qty_field"
@@ -14,16 +14,16 @@
         :value="item.quantity"
         @change="updateQuantity({ ...item, quantity: +$event.target.value })"
       />
-      <button class="cartItem_qty_inc" @click="increase(item.product)">
+      <button class="cartItem_qty_inc" @click.stop="increase(item.product)">
         +
       </button>
 
-      <button class="cartItem_remove_btn" @click="remove(item.product)">
-        <span>{{ strings.remove }}</span>
+      <button class="cartItem_remove_btn" @click.stop="remove(item.product)">
+        <TrashIcon /><span>{{ strings.remove }}</span>
       </button>
     </td>
     <td class="cartItem_totalCost">
-      {{ item.quantity * item.product.price }}
+      {{ (item.quantity * item.product.price).toFixed(2) }}
     </td>
   </tr>
 </template>
@@ -34,10 +34,11 @@ import { CartItem} from './CartItem';
 import store from "../store";
 import i18n from "../i18n";
 
+import TrashIcon from '../icons/trash.vue';
+
 export default {
   name: 'CartRow',
   props: ["item"],
-  data: () => ({ strings: i18n.strings}),
   setup() {
     function updateQuantity(cartItem: CartItem) {
       store.dispatch("cart/setQuantity", cartItem);
@@ -55,6 +56,8 @@ export default {
     }
 
     return {
+      TrashIcon,
+      strings: i18n.strings,
       updateQuantity,
       increase,
       decrease,
@@ -74,25 +77,24 @@ td {
 }
 
 .cartItem_remove_btn {
-  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: var(--nc-lk-2);
   display: inline-block;
   font-size: 1.2rem;
   text-transform: capitalize;
   text-decoration: underline;
-}
+  outline: var(--nc-lk-2);
 
-.cartItem_remove_btn {
-  &
-  &:hover,
-  &:focus {
-    align-self: center;
-    background-color: transparent;
-    background-image: url(../assets/trash.svg);
-    background-position: 0.5rem center;
-    background-repeat: no-repeat;
-    background-size: 1rem;
-    padding-left: 2rem;
-    color: var(--nc-tx-1);
+  &:active {
+    background-color: var(--nc-lk-2);
+    text-decoration: none;
+  }
+
+  svg {
+    height: 1rem;
+    margin-right: 0.5rem;
+    width: 1rem;
   }
 }
 
@@ -145,11 +147,14 @@ td {
 .cartItem_qty_dec,
 .cartItem_qty_inc {
   color: var(--nc-tx-1);
+  cursor: pointer;
   padding: 0.7rem;
   text-align: center;
   vertical-align: top;
+  outline: none;
   width: 3rem;
 
+  &:active,
   &:hover {
     background-color: var(--nc-tx-1);
     color: var(--nc-bg-1);
@@ -158,6 +163,8 @@ td {
 
 .cartItem_qty_field {
   border: 1px solid var(--nc-tx-2);
+  border-left: none;
+  border-right: none;
   height: 1.78rem;
   padding: 0.5rem 0;
   text-align: right;

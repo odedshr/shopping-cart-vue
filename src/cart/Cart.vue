@@ -5,7 +5,7 @@
       <span class="cartSummary_action">{{ strings.viewMyCart }}</span>
     </label>
     <div class="cartWrapper" v-if="count > 0 && isVisible" @click.stop="toggle()">
-      <div class="cartContent">
+      <div class="cartContent" @click.stop="">
         <div class="cart_header">
           <h2 class="cart_title">Review your basket</h2>
           <label class="cart_close" @click.stop="toggle()"><span>close</span></label>
@@ -30,7 +30,7 @@
           <tfoot>
             <tr>
               <td colspan="4"></td>
-              <td class="cart_total">{{ totalCost }}</td>
+              <td class="cart_total">{{ totalCost.toFixed(2) }}</td>
             </tr>
           </tfoot>
         </table>
@@ -171,7 +171,7 @@ export default {
   @extend .animated;
   @extend .flipInX;
   background-color: var(--nc-bg-1);
-  border: 1px solid var(--nc-tx-1);
+  border: 1px solid $clr-border;
   border-radius: 1rem;
   box-shadow: 0 0.3rem 0.3rem $clr-shadow;
   display: flex;
@@ -192,6 +192,7 @@ export default {
 
 .cart_title {
   flex: 1 1 auto;
+  margin-top: 0;
 }
 
 .cart_table {
@@ -254,12 +255,6 @@ export default {
   border: 1px solid var(--nc-tx-2);
   color: var(--nc-tx-2);
   margin: 0 1rem;
-
-  &:hover {
-    background-color: var(--nc-bg-1);
-    border-width: 2px;
-    margin: 0;
-  }
 }
 
 td.cart_total {
