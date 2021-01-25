@@ -85,6 +85,10 @@ return { selected, toggle, remove, update, data, expanded };
     height: 2.5rem;
   }
 
+  .tag {
+    text-transform: capitalize;
+  }
+
   .output {
     border: 1px solid $clr-border;
     box-shadow: 0 0.3rem 0.3rem $clr-shadow;
