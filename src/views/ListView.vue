@@ -37,7 +37,7 @@ export default {
   grid-template-rows: repeat(auto-fit, 30rem);
   grid-gap: 15px;
   list-style: none;
-  margin: 5rem 0 0;
+  margin: 2.1rem 1rem 0;
   padding: 0 1rem;
 }
 </style>

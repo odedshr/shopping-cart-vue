@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4c6f772289ed4e7d9b76",
-    "url": "/shopping-cart-vue/css/app.775ffa26.css"
+    "revision": "98b1aa8d1afea3b2fb89",
+    "url": "/shopping-cart-vue/css/app.e4ecb210.css"
   },
   {
-    "revision": "0c688d6b66ec716d8965",
-    "url": "/shopping-cart-vue/css/table.33294f35.css"
+    "revision": "72b72a8d53a7f1455499",
+    "url": "/shopping-cart-vue/css/table.a39fd6df.css"
   },
   {
     "revision": "c1239c73c16d6f624ed4a28f33798e21",
@@ -92,20 +92,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shopping-cart-vue/img/products/product-9.jpg"
   },
   {
-    "revision": "5615544065b51d69d5d7528517a3f38b",
+    "revision": "d73d071446410a495add8169a6f2ff72",
     "url": "/shopping-cart-vue/index.html"
   },
   {
-    "revision": "4c6f772289ed4e7d9b76",
-    "url": "/shopping-cart-vue/js/app.0938fb6d.js"
+    "revision": "98b1aa8d1afea3b2fb89",
+    "url": "/shopping-cart-vue/js/app.f8d9692d.js"
   },
   {
     "revision": "4de3a77f33ae46231aac",
     "url": "/shopping-cart-vue/js/chunk-vendors.a2c290fb.js"
   },
   {
-    "revision": "0c688d6b66ec716d8965",
-    "url": "/shopping-cart-vue/js/table.34eeea28.js"
+    "revision": "72b72a8d53a7f1455499",
+    "url": "/shopping-cart-vue/js/table.77d4a317.js"
   },
   {
     "revision": "ae6e7ca63041af5e04aa6e26d4a44d67",
