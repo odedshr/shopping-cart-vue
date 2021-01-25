@@ -30,7 +30,7 @@ function randomProduct(id: string): Product {
   return {
     id,
     name,
-    images: [{ src: `/img/products/product-${Math.round(range(1, 15))}.jpg`, alt: name }],
+    images: [{ src: `img/products/product-${Math.round(range(1, 15))}.jpg`, alt: name }],
     type,
     servings,
     popularity: Math.round(range(1, 100)),
