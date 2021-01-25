@@ -4,11 +4,11 @@
       <div class="cartSummary_count" v-if="count">{{ count }}</div>
       <span class="cartSummary_action">{{ strings.viewMyCart }}</span>
     </label>
-    <div class="cartWrapper" v-if="count > 0 && isVisible">
+    <div class="cartWrapper" v-if="count > 0 && isVisible" @click.stop="toggle()">
       <div class="cartContent">
         <div class="cart_header">
           <h2 class="cart_title">Review your basket</h2>
-          <label class="cart_close" @click="toggle()"><span>close</span></label>
+          <label class="cart_close" @click.stop="toggle()"><span>close</span></label>
         </div>
         <table class="cart_table">
           <thead>
