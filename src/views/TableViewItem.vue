@@ -1,57 +1,76 @@
 <template>
   <tr class="product">
-    <td class="product_actions">
-      <button
-        data-task="add"
-        class="product_action product_addBasket"
-        @click="addToCart(product)"
-      >
-        <span>Add to basket</span>
-      </button>
-    </td>
     <td class="product_image_col">
-      <img
-        class="product_image"
-        :src="product.images[0].src"
-        :alt="product.images[0].alt"
-      />
+      <figure class="product_image">
+        <img
+          :src="product.images[0].src"
+          :alt="product.images[0].alt"
+        />
+      </figure>
+      <div class="product_actions">
+        <button
+          class="product_action product_addBasket"
+          @click="addToCart(product)"
+        >
+          <BasketIcon/>
+          <span>Add to basket</span>
+        </button>
+        <div class="product_qty">{{count}}</div>
+      </div>
     </td>
     <td class="product_name">{{ product.name }}</td>
     <td class="product_cost">{{ product.price }}</td>
     <td class="product_servings">{{ product.servings }}</td>
     <td class="product_kCalPerServing">{{ product.nutrition.kCalPerServing }}</td>
-    <td class="product_lowSugar"><CheckIcon v-if="product.lowSugar" />&nbsp;</td>
-    <td class="product_lowFat"><CheckIcon v-if="product.nutrition.lowFat" />&nbsp;</td>
-    <td class="product_glutenFree"><CheckIcon v-if="product.dietaryOptions.glutenFree" />&nbsp;</td>
-    <td class="product_nutFree"><CheckIcon v-if="product.dietaryOptions.nutFree" />&nbsp;</td>
+    <td class="product_lowSugar"><SugarIcon v-if="product.lowSugar" />&nbsp;</td>
+    <td class="product_lowFat"><HeartIcon v-if="product.nutrition.lowFat" />&nbsp;</td>
+    <td class="product_glutenFree"><GlutenIcon v-if="product.dietaryOptions.glutenFree" />&nbsp;</td>
+    <td class="product_nutFree"><NutIcon v-if="product.dietaryOptions.nutFree" />&nbsp;</td>
     <td class="product_kosher">{{ product.dietaryOptions.kosher }}</td>
-    <td class="product_vegetarian"><CheckIcon v-if="product.dietaryOptions.vegetarian" />&nbsp;</td>
-    <td class="product_vegan"><CheckIcon v-if="product.dietaryOptions.vegan" />&nbsp;</td>
+    <td class="product_vegetarian"><VegetarianIcon v-if="product.dietaryOptions.vegetarian" />&nbsp;</td>
+    <td class="product_vegan"><VeganIcon v-if="product.dietaryOptions.vegan" />&nbsp;</td>
   </tr>
 </template>
 <script lang="ts">
-import i18n from "../i18n";
+import { computed, defineComponent } from 'vue';
+import { useStore } from "vuex";
 import { Product } from '../products/Product';
-import store from "../store";
+import i18n from "../i18n";
 
-import CheckIcon from '../icons/check.vue';
+import BasketIcon from '../icons/basket.vue';
+import SugarIcon from '../icons/sugar.vue';
+import HeartIcon from '../icons/heart.vue';
+import GlutenIcon from '../icons/gluten-free.vue';
+import NutIcon from '../icons/nut-free.vue';
+import VegetarianIcon from '../icons/vegetarian.vue';
+import VeganIcon from '../icons/vegan.vue';
 
-export default {
+export default defineComponent({
   name: "ListViewItem",
   props: ["product"],
-  components: { CheckIcon }, 
-  setup(){
+  components: {
+    BasketIcon,
+    SugarIcon,
+    HeartIcon,
+    GlutenIcon,
+    NutIcon,
+    VegetarianIcon,
+    VeganIcon }, 
+  setup(props){
     const strings = i18n.strings;
+    const store = useStore();
+    const count = computed(() => store.state.cart[props.product.id]?.quantity || "+");
     function addToCart(product: Product) {
       store.dispatch("cart/addItem", product);
     }
 
     return {
+      count,
       addToCart,
       strings
     }
   }
-}
+});
 </script>
 
 <style scoped lang="scss">
@@ -61,82 +80,16 @@ export default {
   text-transform: capitalize;
 }
 
-tr:not(:last-child) td {
-  border-bottom: 1px solid $clr-border;
+tr {
+  height: 6rem;
+  
+  &:not(:last-child) td {
+    border-bottom: 1px solid $clr-border;
+  }
 }
 
 td {
   padding: 0.5rem;
-
-  &:not(:last-child) {
-    border-right: 1px solid $clr-border;
-  }
-}
-
-.product_outOfStock {
-  &:before {
-    content: "Out of Stock";
-    font-size: 2rem;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-  }
-
-  .product_image,
-  .product_summary {
-    opacity: 0.5;
-  }
-}
-
-.product_actions {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: flex-end;
-  top: 0;
-  padding: 0.5rem;
-  position: absolute;
-  width: 100%;
-}
-
-.product_action {
-  &,
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: var(--nc-bg-1);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    border: 1px solid var(--nc-lk-tx);
-    border-radius: 50%;
-    display: inline-block;
-    cursor:pointer;
-    outline: none;
-    height: 3rem;
-    width: 3rem;
-
-    &:not(:last-child) {
-      margin-right: 0.5rem;
-    }
-
-    span {
-      display: none;
-    }
-
-    &.product_addBasket {
-      &,
-      &:hover,
-      &:focus {
-        background-image: url(../assets/add-to-basket.svg);
-      }
-    }
-  }
-}
-
-.product_summary {
-  display: flex;
-  justify-content: space-between;
 }
 
 .product_name {
@@ -169,29 +122,36 @@ td {
 }
 
 .product_image_col {
-  vertical-align: middle;
+  padding: 0.5rem;
+  position: relative;
   text-align: center;
+  vertical-align: middle;
 }
 
 .product_image {
+  align-items: center;
+  display: flex;
   height: 4rem;
-  display: inline-block;
+  overflow: hidden;
+  justify-content: center;
+  padding: 0;
+  margin: 0.5rem;
   width: 4rem;
+
+  img {
+    width: 100%;
+  }
 }
 
-.product_add {
-  font-size: 1rem;
-  display: inline-block;
-  padding: 6px 12px;
-  text-align: center;
-  text-decoration: none;
-  white-space: nowrap;
-  background: var(--nc-lk-1);
-  color: var(--nc-lk-tx);
-  border: 0;
-  border-radius: 4px;
-  box-sizing: border-box;
-  cursor: pointer;
-  color: var(--nc-lk-tx);
+.product_actions {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  transform: scale(1);
+  transition: transform 0.25s ease-in-out;
+
+  tr:not(:hover) & {
+    transform: scale(0);
+  }
 }
 </style>

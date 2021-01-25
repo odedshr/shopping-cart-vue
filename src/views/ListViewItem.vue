@@ -164,22 +164,6 @@ export default defineComponent({
   }
 }
 
-.product_qty {
-  align-items: baseline;
-  background-color: var(--nc-lk-1);
-  border-radius: 50%;
-  bottom: 0.5rem;
-  color: var(--nc-bg-1);
-  display: inline-flex;
-  font-size: 1rem;
-  justify-content: center;
-  height: 1.2rem;
-  pointer-events: none;
-  position: absolute;
-  right: 0.5rem;
-  width: 1.2rem;
-}
-
 .product_info {
   display: flex;
   gap: 0.5rem;

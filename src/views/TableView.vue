@@ -1,17 +1,17 @@
 <template>
   <table class="tableView" cellspacing="0">
     <thead>
-      <th colspan="3">{{strings.name}}</th>
+      <th colspan="2">{{strings.name}}</th>
       <th>{{strings.price}}</th>
       <th>{{strings.servings}}</th>
       <th :title="strings.kCal"><CaloriesIcon /></th>
-      <th :title="strings.lowSugar"><SugarIcon /></th>
-      <th :title="strings.lowFat"><HeartIcon /></th>
-      <th :title="strings.glutenFree"><GlutenIcon /></th>
-      <th :title="strings.nutFree"><NutIcon /></th>
-      <th :title="strings.kosherParve"><KosherIcon /></th>
-      <th :title="strings.vegetarian"><VegetarianIcon /></th>
-      <th :title="strings.vegan"><VeganIcon /></th>
+      <th class="boolCol" :title="strings.lowSugar"><SugarIcon /></th>
+      <th class="boolCol" :title="strings.lowFat"><HeartIcon /></th>
+      <th class="boolCol" :title="strings.glutenFree"><GlutenIcon /></th>
+      <th class="boolCol" :title="strings.nutFree"><NutIcon /></th>
+      <th  :title="strings.kosherParve"><KosherIcon /></th>
+      <th class="boolCol" :title="strings.vegetarian"><VegetarianIcon /></th>
+      <th class="boolCol" :title="strings.vegan"><VeganIcon /></th>
     </thead>
     <tbody>
     <TableViewItem
@@ -76,26 +76,27 @@ export default {
 
 th {
   border-bottom: 1px solid $clr-border;
-  
-  &:not(:last-child) {
-    border-right: 1px solid $clr-border;
-  }
 }
 
 th {
-  vertical-align: top;
   font-weight: 100;
+  line-height: 1rem;
+  padding-top: 0.75rem;
 
   &[title] {
     cursor: help;
   }
 }
 
-tr:nth-child(2n) {
-  background-color: var(--nc-bg-2);
+tr:not(:nth-child(2n)) {
+  background-color: rgba(0,0,0, 0.1);
 }
 
 td {
   padding: 0.5rem;
+}
+
+.boolCol {
+  width: 3rem;
 }
 </style>
