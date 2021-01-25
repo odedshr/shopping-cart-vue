@@ -1,0 +1,31 @@
+$clr-shadow: rgba(0, 0, 0, 0.16);
+$clr-border: #ccc;
+
+  .field {
+    border: none;
+    display: inline-block;
+    padding: 0.5rem;
+  } 
+
+  .tag {
+    border: 0.1rem solid var(--nc-lk-1);
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    display: inline-block;
+
+    height: 2.5rem;
+    overflow: hidden;
+    padding: 0 0.5rem;
+    position: relative;
+    text-transform: capitalize;
+    transition: color 0.25s ease-in-out;
+    z-index: 0;
+
+    fieldset[data-expanded="false"] & {
+      pointer-events: none;
+    }
+
+    input + & {
+      cursor: pointer;
+    }
+  }

@@ -1,7 +1,12 @@
 import { createApp } from 'vue'
-import App from './App.vue'
-import './registerServiceWorker'
-import router from './router'
-import store from './store'
 
-createApp(App).use(store).use(router).mount('#app')
+import App from './App.vue'
+// service-workers don't work on github-pages
+// import './registerServiceWorker'
+import router from './router'
+import createStore from './store'
+
+createApp(App)
+  .use(createStore)
+  .use(router)
+  .mount('#app');
