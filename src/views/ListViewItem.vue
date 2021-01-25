@@ -11,8 +11,10 @@
         class="product_action product_addBasket"
         @click="addToCart(product)"
       >
+        <BasketIcon/>
         <span>Add to basket</span>
       </button>
+      <div class="product_qty">{{count}}</div>
     </div>
     <div class="product_info">
       <span v-if="product.dietaryOptions.glutenFree" :title="strings.glutenFree"><GlutenIcon /></span>
@@ -34,10 +36,12 @@
 </template>
 
 <script lang="ts">
-import i18n from "../i18n";
+import { computed , defineComponent} from 'vue';
+import { useStore } from "vuex";
 import { Product } from '../products/Product';
-import store from "../store";
+import i18n from "../i18n";
 
+import BasketIcon from '../icons/basket.vue';
 import SugarIcon from '../icons/sugar.vue';
 import HeartIcon from '../icons/heart.vue';
 import GlutenIcon from '../icons/gluten-free.vue';
@@ -47,10 +51,11 @@ import VegetarianIcon from '../icons/vegetarian.vue';
 import VeganIcon from '../icons/vegan.vue';
 import CaloriesIcon from '../icons/kcal.vue';
 
-export default {
+export default defineComponent({
   name: "ListViewItem",
   props: ["product"],
   components: {
+    BasketIcon,
     SugarIcon,
     HeartIcon,
     GlutenIcon,
@@ -60,19 +65,21 @@ export default {
     VeganIcon,
     CaloriesIcon
   },
-
-  setup(){
+  setup(props){
     const strings = i18n.strings;
+    const store = useStore();
+    const count = computed(() => store.state.cart[props.product.id]?.quantity || "+");
     function addToCart(product: Product) {
       store.dispatch("cart/addItem", product);
     }
 
     return {
+      count,
       addToCart,
       strings
     }
   }
-}
+});
 </script>
 
 <style scoped lang="scss">
@@ -113,38 +120,59 @@ export default {
 }
 
 .product_action {
-  &,
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: var(--nc-bg-1);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    border: 1px solid var(--nc-lk-tx);
-    border-radius: 50%;
-    display: inline-block;
-    cursor:pointer;
-    outline: none;
-    height: 3rem;
-    width: 3rem;
+  align-items :center;
+  background-color: var(--nc-bg-1);
+  border: 2px solid transparent;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  cursor:pointer;
+  height: 3rem;
+  outline: none;
+  transition: transform 0.25s ease-in-out, border 0.25s ease-in-out;
+  width: 3rem;
 
-    &:not(:last-child) {
-      margin-right: 0.5rem;
-    }
+  &:not(:last-child) {
+    margin-right: 0.5rem;
+  }
 
-    span {
-      display: none;
-    }
+  span {
+    display: none;
+  }
 
-    &.product_addBasket {
-      &,
-      &:hover,
-      &:focus {
-        background-image: url(../assets/add-to-basket.svg);
-      }
+  &.product_addBasket {
+    position: relative;
+
+    svg {
+      height: 2rem;
+      width: 2rem;
     }
   }
+
+  &:active,
+  &:focus {
+    border-color: var(--nc-lk-tx);
+  }
+  &:hover,
+  &:active  {
+    transform: scale(1.1);
+  }
+}
+
+.product_qty {
+  align-items: baseline;
+  background-color: var(--nc-lk-1);
+  border-radius: 50%;
+  bottom: 0.5rem;
+  color: var(--nc-bg-1);
+  display: inline-flex;
+  font-size: 1rem;
+  justify-content: center;
+  height: 1.2rem;
+  pointer-events: none;
+  position: absolute;
+  right: 0.5rem;
+  width: 1.2rem;
 }
 
 .product_info {

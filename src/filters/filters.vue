@@ -8,6 +8,7 @@
       <MultiSelect class="filter-type"
         :items="allTypes"
         :value="types"
+        placeholder="What are you craving for?"
         @update="updateTypes"
       />    
     </section>

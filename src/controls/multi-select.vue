@@ -7,12 +7,13 @@
   >
     <slot />
     <ul class="output" @click="toggle">
-      <li v-for="({key,value}, index) in data.filter(i=>i.checked)"
+      <li v-for="({key,value}, index) in filteredData"
         :key="index"
         class="tag"
         data-pressed="true"
         @click.stop="remove(key)"
       >{{value}}</li>
+      <li v-if="!filteredData.length" class="placeholder">{{placeholder}}</li>
     </ul>
     <ul class="input">
       <li v-for="({key,value, checked}, index) in data" :key="index">
@@ -27,10 +28,12 @@
 import { ref, computed, defineComponent } from 'vue';
 import { KeyValue } from './key-value';
 
+type SelectableItem = { item: KeyValue; checked: boolean };
 export default defineComponent({
   props: {
     items: { type: Object, default: [] as KeyValue[]},
-    value: { type: Object, default: [] as string[]}
+    value: { type: Object, default: [] as string[]},
+    placeholder: { type: String, default: ""}
   },
 
   setup(props, {emit}) {
@@ -39,6 +42,7 @@ export default defineComponent({
     const expanded = ref(false);
     const data = computed(()=> props.items
       .map((item: KeyValue) => ({ ...item, checked: (selected.value.indexOf(item.key) > -1)})));
+    const filteredData = computed(() => data.value.filter((i: SelectableItem)=>i.checked));
     
     function toggle() {
       const newSelected = (selected.value as string[]).join();
@@ -64,7 +68,7 @@ export default defineComponent({
       selected.value = [...new Set(updatedList) ];
     }
 
-return { selected, toggle, remove, update, data, expanded };
+return { toggle, remove, update, data, filteredData, expanded };
   }
 });
 </script>
@@ -105,6 +109,11 @@ return { selected, toggle, remove, update, data, expanded };
       font-size: 1.2rem;
       height: 1.8rem;
     }
+  }
+
+  .placeholder {
+    color: var(--nc-tx-2);
+    height: 1.8rem;
   }
 
   .input {
