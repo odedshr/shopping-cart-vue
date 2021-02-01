@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/shopping-cart-vue/precache-manifest.d9e3eb8207dfbde72d4650ef277c485c.js"
+  "/shopping-cart-vue/precache-manifest.8c65cd68d98cea43012b0fb61bfb26f3.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "shopping-cart-vue"});
